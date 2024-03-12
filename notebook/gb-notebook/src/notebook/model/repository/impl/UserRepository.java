@@ -19,11 +19,16 @@ import static notebook.util.DBConnector.DB_PATH;
 
 public class UserRepository implements GBRepository {
     private final UserMapper mapper;
-    private final GBRepository operation;
+    private final String fileName;
 
-        public UserRepository(GBRepository operation) {
+        public UserRepository(String fileName) {
             this.mapper = new UserMapper();
-            this.operation = operation;
+            this.fileName = fileName;
+            try {FileWriter writer = new FileWriter(fileName, true);
+                writer .flush();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
 
